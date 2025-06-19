@@ -1,0 +1,22 @@
+version: "3"
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./backend:/app
+    env_file:
+      - ./backend/.env
+
+  frontend:
+    working_dir: /app
+    build:
+      context: ./frontend
+    command: npm run dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+    environment:
+      - NODE_ENV=development
